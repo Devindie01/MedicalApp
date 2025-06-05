@@ -26,4 +26,9 @@ public class AppointmentController {
     public List<AppointmentDto> getAllAppointments(){
         return  appointmentService.getAllAppointments();
     }
+
+    @GetMapping("/active")
+    public Long getActiveAppoinmentId(){
+        return appointmentService.getActiveAppointmentId();
+    }
 }
