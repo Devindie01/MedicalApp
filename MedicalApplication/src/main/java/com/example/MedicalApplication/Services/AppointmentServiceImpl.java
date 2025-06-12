@@ -2,6 +2,7 @@ package com.example.MedicalApplication.Services;
 
 import com.example.MedicalApplication.Dtos.AppointmentDto;
 import com.example.MedicalApplication.Entities.Appointment;
+import com.example.MedicalApplication.Enums.AppointmentStatus;
 import com.example.MedicalApplication.Mappers.AppointmentMapper;
 
 import com.example.MedicalApplication.Repositories.AppointmentRepository;
@@ -49,5 +50,28 @@ public class AppointmentServiceImpl implements AppointmentService{
         }
 
         return (appointment.getId() - firstAppointmentOfDay.getId() + 1);
+    }
+
+    @Override
+    public int getTotalAppointmentsPerDay() {
+        return appointmentRepository.countByDateBetween(
+                LocalDate.now().atStartOfDay(),
+                LocalDate.now().plusDays(1).atStartOfDay()
+        );
+    }
+
+    @Override
+    public int getTotalCompletedAppointmentsPerDay() {
+        return appointmentRepository.countByDateBetweenAndStatus(
+                LocalDate.now().atStartOfDay(),
+                LocalDate.now().plusDays(1).atStartOfDay(),
+                AppointmentStatus.COMPLETED
+
+        );
+    }
+
+    @Override
+    public AppointmentDto createAppointment(AppointmentDto appointmentDto) {
+        return null;
     }
 }

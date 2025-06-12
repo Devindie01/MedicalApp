@@ -5,9 +5,7 @@ import com.example.MedicalApplication.Entities.Appointment;
 import com.example.MedicalApplication.Services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,4 +29,20 @@ public class AppointmentController {
     public Long getActiveAppoinmentId(){
         return appointmentService.getActiveAppointmentId();
     }
+
+    @GetMapping("/total")
+    public int getTotalAppointmentsPerDay() {
+        return appointmentService.getTotalAppointmentsPerDay();
+    }
+    @GetMapping("/completed")
+    public int getCompletedAppointmentsPerDay() {
+        return appointmentService.getTotalCompletedAppointmentsPerDay();
+    }// Assuming this method is implemented to count completed appointments
+
+    @PostMapping("/create")
+    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto appointmentDto) {
+        AppointmentDto createdAppointment = appointmentService.createAppointment(appointmentDto);
+        return ResponseEntity.ok(createdAppointment);
+    }
+
 }

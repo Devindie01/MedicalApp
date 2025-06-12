@@ -1,6 +1,5 @@
 package com.example.MedicalApplication.Dtos;
 
-import com.example.MedicalApplication.Entities.Patient;
 import com.example.MedicalApplication.Enums.AppointmentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppointmentDto {
+public class AppointmentCreationDto {
     private int appointmentId;
     private PatientDto patient;
     private AppointmentStatus status;

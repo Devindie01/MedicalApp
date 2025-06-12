@@ -11,4 +11,10 @@ public interface AppointmentService {
     List<AppointmentDto> getAllAppointments();
 
     Long getActiveAppointmentId();
+
+    int getTotalAppointmentsPerDay();
+
+    int getTotalCompletedAppointmentsPerDay();
+
+    AppointmentDto createAppointment(AppointmentDto appointmentDto);
 }

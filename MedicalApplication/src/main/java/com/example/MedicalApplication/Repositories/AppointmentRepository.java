@@ -14,4 +14,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     Appointment findByStatus(AppointmentStatus status);
 
     Appointment findFirstByDateBetweenOrderByDateAsc(LocalDateTime localDateTime, LocalDateTime localDateTime1);
+
+    int countByDateBetween(LocalDateTime localDateTime, LocalDateTime localDateTime1);
+
+    int countByDateBetweenAndStatus(LocalDateTime localDateTime, LocalDateTime localDateTime1, AppointmentStatus appointmentStatus);
 }
