@@ -1,5 +1,6 @@
 package com.example.MedicalApplication.Services;
 
+import com.example.MedicalApplication.Dtos.AppointmentCreationDto;
 import com.example.MedicalApplication.Dtos.AppointmentDto;
 import com.example.MedicalApplication.Entities.Appointment;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,5 @@ public interface AppointmentService {
 
     int getTotalCompletedAppointmentsPerDay();
 
-    AppointmentDto createAppointment(AppointmentDto appointmentDto);
+    AppointmentDto createAppointment(AppointmentCreationDto appointmentDto);
 }

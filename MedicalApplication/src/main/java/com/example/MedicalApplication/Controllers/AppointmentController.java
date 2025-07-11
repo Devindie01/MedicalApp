@@ -1,5 +1,6 @@
 package com.example.MedicalApplication.Controllers;
 
+import com.example.MedicalApplication.Dtos.AppointmentCreationDto;
 import com.example.MedicalApplication.Dtos.AppointmentDto;
 import com.example.MedicalApplication.Entities.Appointment;
 import com.example.MedicalApplication.Services.AppointmentService;
@@ -40,7 +41,7 @@ public class AppointmentController {
     }// Assuming this method is implemented to count completed appointments
 
     @PostMapping("/create")
-    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto appointmentDto) {
+    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentCreationDto appointmentDto) {
         AppointmentDto createdAppointment = appointmentService.createAppointment(appointmentDto);
         return ResponseEntity.ok(createdAppointment);
     }

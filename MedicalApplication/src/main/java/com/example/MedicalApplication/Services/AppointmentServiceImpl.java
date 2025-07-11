@@ -1,11 +1,14 @@
 package com.example.MedicalApplication.Services;
 
+import com.example.MedicalApplication.Dtos.AppointmentCreationDto;
 import com.example.MedicalApplication.Dtos.AppointmentDto;
 import com.example.MedicalApplication.Entities.Appointment;
+import com.example.MedicalApplication.Entities.Patient;
 import com.example.MedicalApplication.Enums.AppointmentStatus;
 import com.example.MedicalApplication.Mappers.AppointmentMapper;
 
 import com.example.MedicalApplication.Repositories.AppointmentRepository;
+import com.example.MedicalApplication.Repositories.PatientRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private PatientRepository patientRepository;
 
     @Transactional
     public List<AppointmentDto> getAllAppointments() {
@@ -71,7 +76,20 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public AppointmentDto createAppointment(AppointmentDto appointmentDto) {
-        return null;
+    public AppointmentDto createAppointment(AppointmentCreationDto appointmentDto) {
+        Patient patient = new Patient();
+        patient.setName(appointmentDto.getPatientName());
+        patient.setPhoneNumber(appointmentDto.getPatientPhoneNum());
+        patientRepository.save(patient);
+        Appointment appointment = Appointment.builder()
+                .appointmentNo(appointmentDto.getAppointmentId())
+                .patient(patient)
+                .status(AppointmentStatus.SCHEDULED)
+                .date(appointmentDto.getDate())
+                .build();
+
+        appointmentRepository.save(appointment);
+        return AppointmentMapper.appointmentToAppointmentDto(appointment);
+
     }
 }
