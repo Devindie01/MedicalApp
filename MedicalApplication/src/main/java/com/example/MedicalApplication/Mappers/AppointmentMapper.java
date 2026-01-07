@@ -6,7 +6,7 @@ import com.example.MedicalApplication.Entities.Appointment;
 public class AppointmentMapper {
     public static AppointmentDto appointmentToAppointmentDto(Appointment appointment){
         return new AppointmentDto(
-                appointment.getId(),
+                appointment.getAppointmentNo(),
                 PatientMapper.patientToPatientDto(appointment.getPatient()),
                 appointment.getStatus(),
                 appointment.getDate());
